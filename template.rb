@@ -87,7 +87,7 @@ def add_foreman
   say "Adding foreman"
   file "Procfile.dev", <<~RUBY
   web: bundle exec rails server
-  worker: bundle exec sidekiq -C config/sidekip.yml
+  worker: bundle exec sidekiq -C config/sidekiq.yml
   mailcatcher: mailcatcher --foreground --http-ip=0.0.0.0
   RUBY
 end
