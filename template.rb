@@ -54,15 +54,15 @@ def add_sidekiq
     "require 'sidekiq/web'\n\n",
     before: "Rails.application.routes.draw do"
 
-  content = <<~RUBY
-    if Rails.env.development?
+  content = <<-CODE
+  if Rails.env.development?
+    mount Sidekiq::Web => '/sidekiq'
+  else
+    authenticate :user, lambda { |u| u.admin? } do
       mount Sidekiq::Web => '/sidekiq'
-    else
-      authenticate :user, lambda { |u| u.admin? } do
-        mount Sidekiq::Web => '/sidekiq'
-      end
     end
-  RUBY
+  end
+  CODE
   insert_into_file "config/routes.rb", "  #{content}\n", after: "Rails.application.routes.draw do\n"
   
   file 'config/sidekiq.yml', <<~RUBY
@@ -98,7 +98,7 @@ def add_tailwind
   say "Adding tailwind CSS"
   run "yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9"
   run "npx tailwindcss init"
-  insert_into_file "tailwind.config.js", "\n   \"./app/**/*.html.erb\",\n   ", after: "purge: ["
+  insert_into_file "tailwind.config.js", "\n    \"./app/**/*.html.erb\",\n    ", after: "purge: ["
   file "app/javascript/application.css", <<~RUBY
   @import "tailwindcss/base";
   @import "tailwindcss/utilities";
