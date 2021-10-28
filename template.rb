@@ -13,8 +13,8 @@ def install_gems
   gem_group :development, :test do
     gem "rspec-rails"
   end
-  run 'gem install mailcatcher'
-  run 'gem install foreman'
+  run 'gem install mailcatcher --no-ri --no-rdoc'
+  run 'gem install foreman --no-ri --no-rdoc'
 end
 
 def start_spring
