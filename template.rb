@@ -15,7 +15,7 @@ def install_gems
     gem "rspec-rails"
   end
   gem_group :development do
-    gem 'mailcatcher'
+    gem 'mailcatcher', git: 'https://github.com/yanovitchsky/mailcatcher.git'
   end
 end
 
