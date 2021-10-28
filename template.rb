@@ -107,6 +107,12 @@ def add_tailwind
   insert_into_file "app/javascript/packs/application.js", "import  \"../application.css\";\n", after: "import \"channels\"\n"
 end
 
+def add_gitignore
+  file ".gitignore", <<~BASH
+  .vendor/
+  BASH
+end
+
 install_gems
 
 after_bundle do
@@ -116,6 +122,7 @@ after_bundle do
   add_rspec
   add_tailwind
   add_foreman
+  add_gitignore
   rails_command("db:setup")
   rails_command("db:migrate")
   git :init
