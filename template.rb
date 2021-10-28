@@ -10,13 +10,11 @@ def install_gems
   gem 'bcrypt', '~> 3.1.7'
   gem 'redis', '~> 4.0'
   gem 'sidekiq'
-  gem 'foreman'
   gem_group :development, :test do
     gem "rspec-rails"
   end
-  gem_group :development do
-    gem 'mailcatcher', git: 'https://github.com/yanovitchsky/mailcatcher.git'
-  end
+  run 'gem install mailcatcher'
+  run 'gem install foreman'
 end
 
 def start_spring
