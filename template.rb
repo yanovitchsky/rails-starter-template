@@ -89,6 +89,7 @@ def add_foreman
   web: bundle exec rails server
   worker: bundle exec sidekiq -C config/sidekiq.yml
   mailcatcher: mailcatcher --foreground --http-ip=0.0.0.0
+  front: ./bin/webpack-dev-server
   RUBY
 end
 
@@ -97,6 +98,7 @@ def add_tailwind
   run "yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat @tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9"
   run "npx tailwindcss init"
   insert_into_file "tailwind.config.js", "\n    \"./app/**/*.html.erb\",\n    ", after: "purge: ["
+  insert_into_file "postcss.config.js", "\n     require('tailwindcss')('./tailwind.config.js'),", after: "plugins: [" 
   file "app/javascript/application.css", <<~RUBY
   @import "tailwindcss/base";
   @import "tailwindcss/utilities";

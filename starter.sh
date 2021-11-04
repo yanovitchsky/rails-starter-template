@@ -1,1 +1,2 @@
-DISABLE_SPRING=true rails new $1 --database=postgresql --template https://raw.githubusercontent.com/yanovitchsky/rails-starter-template/master/template.rb
+#DISABLE_SPRING=true rails new $1 --database=postgresql --template https://raw.githubusercontent.com/yanovitchsky/rails-starter-template/master/template.rb
+DISABLE_SPRING=true rails new $1 --database=postgresql --template /Users/yannakoun/Project/techshelter/formation/rails-starter-template/template.rb
